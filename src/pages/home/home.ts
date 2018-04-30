@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 
+import { TaskProvider } from '../../providers/task/task'
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -9,8 +11,9 @@ export class HomePage {
   public tasks = [];
 
   constructor(public navCtrl: NavController, 
-    public alertCtrl: AlertController) {
-
+    public alertCtrl: AlertController,
+    private taskService: TaskProvider) {
+      this.tasks = this.taskService.getTasks();
   }
 
   openTaskAlert() {
@@ -31,7 +34,7 @@ export class HomePage {
           text: "Add Task",
           handler: (inputData) => {
             let taskText = inputData.addTaskInput;
-            this.tasks.push(taskText);
+            this.taskService.addTask(taskText);
           }
         }
       ]
