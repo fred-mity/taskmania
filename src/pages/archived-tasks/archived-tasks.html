@@ -1,0 +1,22 @@
+<!--
+  Generated template for the ArchivedTasksPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>ArchivedTasks</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let task of archivedTasks">
+      {{task}}
+    </ion-item>
+  </ion-list>
+</ion-content>
