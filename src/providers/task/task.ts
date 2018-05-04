@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 /*
@@ -10,8 +10,9 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class TaskProvider {
   private tasks = [];
+  private archived = [];
 
-  constructor(public http: HttpClient) {
+  constructor(private http: Http) {
     console.log('Hello TaskProvider Provider');
   }
 
@@ -19,8 +20,21 @@ export class TaskProvider {
     return this.tasks;
   }
 
+  getArchivedTasks() {
+    return this.archived;
+  }
+
   addTask(task) {
     this.tasks.push(task);
   }
 
+  archiveTask(index) {
+    let archivedTask = this.tasks[index];
+    this.tasks.splice(index, 1);
+    this.archived.push(archivedTask);
+  }
+
+  modifyTask(index, newTask) {
+    this.tasks[index] = newTask;
+  }
 }

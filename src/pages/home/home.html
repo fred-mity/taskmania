@@ -5,23 +5,40 @@
     </ion-title>
   </ion-navbar>
   <ion-buttons end>
-      <button ion-button (click)="openTaskAlert()">
-          <ion-icon name="add"></ion-icon>
-      </button>
+    <button ion-button (click)="toggleReorder()" *ngIf="!reorderIsEnabled">
+      Edit
+    </button>
+    <button ion-button (click)="toggleReorder()" *ngIf="reorderIsEnabled">
+      Done
+    </button>
+    <button ion-button (click)="openNewTaskAlert()">
+        <ion-icon name="add"></ion-icon>
+    </button>
   </ion-buttons>
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <ion-item-sliding *ngFor="let task of tasks">
+  <ion-list [reorder]="reorderIsEnabled" (ionItemReorder)="itemReordered($event)">
+    <ion-item-sliding *ngFor="let task of tasks; let i = index">
       <ion-item>
         {{task}}
       </ion-item>
+      <ion-item-options side="left">
+        <button ion-button (click)="openEditTaskAlert(i)">
+          <ion-icon name="create"></ion-icon>
+        </button>
+      </ion-item-options>
       <ion-item-options side="right">
-        <button color="danger" ion-button>
+        <button color="danger" ion-button (click)="archiveTask(i)">
           <ion-icon name="trash"></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab (click)="goToArchivePage()">
+      <ion-icon name="archive"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

@@ -10,6 +10,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { TaskProvider } from '../providers/task/task';
 
+//import { ArchivedTasksPageModule } from '../pages/archived-tasks/archived-tasks.module'
+
 @NgModule({
   declarations: [
     MyApp,
